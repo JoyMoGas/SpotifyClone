@@ -1,0 +1,9 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: #121212; /* Match theme */
+    color: white;
+    width: 100%; /* Fill grid area */
+    height: 100%;
+    padding: 16px; /* Match App.css sidebar padding */
+}

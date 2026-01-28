@@ -4,17 +4,25 @@ import MainContent from './components/MainContent';
 import Navbar from './components/Navbar';
 import SideBarLeft from './components/SideBarLeft';
 import SideBarRight from './components/SideBarRight';
+import LikedSongs from './components/LikedSongs';
+import { MusicProvider, useMusic } from './context/MusicContext';
 
-function App() {
+function AppContent() {
+  const { currentView, currentSong } = useMusic();
+
+  const gridTemplateColumns = currentSong 
+    ? "280px 1fr 280px" 
+    : "280px 1fr 0px";
+
   return (
-    <div className="app-container">
+    <div className="app-container" style={{ gridTemplateColumns }}>
       
       <div className="main-body">
         <SideBarLeft />
         
         <div className="center-wrapper">
             <Navbar />
-            <MainContent />
+            {currentView === 'home' ? <MainContent /> : <LikedSongs />}
         </div>
 
         <SideBarRight />
@@ -23,6 +31,14 @@ function App() {
       <Footer />
       
     </div>
+  );
+}
+
+function App() {
+  return (
+    <MusicProvider>
+      <AppContent />
+    </MusicProvider>
   );
 }
 

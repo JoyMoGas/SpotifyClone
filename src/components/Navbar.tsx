@@ -1,8 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight, faSearch, faHome } from '@fortawesome/free-solid-svg-icons';
 import './styles/Navbar.css';
+import { useMusic } from '../context/MusicContext';
 
 export default function Navbar() {
+  const { setView } = useMusic();
   return (
     <nav className="navbar">
       <div className="arrows">
@@ -10,7 +12,8 @@ export default function Navbar() {
         <button><FontAwesomeIcon icon={faChevronRight} /></button>
       </div>
 
-      <div className="home-icon">
+      <div className="home-icon" onClick={() => setView('home')}>
+        
         <FontAwesomeIcon icon={faHome} />
       </div>
 
