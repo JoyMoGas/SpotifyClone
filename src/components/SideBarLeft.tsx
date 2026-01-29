@@ -22,7 +22,7 @@ export default function SideBarLeft() {
                Tus Me Gusta
             </li>
             <li style={{ listStyle: 'none', padding: '5px 0' }}>Playlist Rock</li>
-            <li style={{ listStyle: 'none', padding: '5px 0' }}>Favoritos 2024</li>
+            <li style={{ listStyle: 'none', padding: '5px 0' }}>Favoritos 2025</li>
             <li style={{ listStyle: 'none', padding: '5px 0' }}>Podcast Tech</li>
         </ul>
       </div>

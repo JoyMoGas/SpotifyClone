@@ -8,7 +8,6 @@ export default function MainContent() {
   const { likedSongs, toggleLike, playSong } = useMusic();
   const [sortOption, setSortOption] = useState<'title' | 'artist' | 'date'>('date');
 
-  // Sort songs logic
   const sortedSongs = [...songs].sort((a, b) => {
     if (sortOption === 'title') return a.title.localeCompare(b.title);
     if (sortOption === 'artist') return a.artist.localeCompare(b.artist);
@@ -18,7 +17,6 @@ export default function MainContent() {
   return (
     <main className="main-content-scroll-area">
       
-      {/* Playlists Section */}
       <section style={{ marginBottom: '32px' }}>
         <h2 style={{ fontSize: '24px', marginBottom: '20px', fontWeight: 'bold' }}>Listas recomendadas</h2>
         
@@ -35,7 +33,6 @@ export default function MainContent() {
         </div>
       </section>
 
-      {/* Songs Section */}
       <section>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
            <h2 style={{ fontSize: '24px', fontWeight: 'bold' }}>Tendencias</h2>
@@ -50,7 +47,6 @@ export default function MainContent() {
             </select>
         </div>
         
-        {/* Song List Header */}
         <div style={{ display: 'grid', gridTemplateColumns: '16px 4fr 3fr 3fr 50px', padding: '0 16px', color: '#b3b3b3', borderBottom: '1px solid #2a2a2a', paddingBottom: '12px', marginBottom: '16px', fontSize: '14px' }}>
             <span>#</span>
             <span>Título</span>
@@ -59,7 +55,6 @@ export default function MainContent() {
             <span style={{ textAlign: 'center' }}><FontAwesomeIcon icon={faClock} /></span>
         </div>
 
-        {/* Songs Rows */}
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             {sortedSongs.map((song, index) => (
                 <div 
@@ -85,7 +80,7 @@ export default function MainContent() {
                                 color: likedSongs.includes(song.id) ? '#1db954' : '#b3b3b3', 
                                 fontSize: '16px', 
                                 cursor: 'pointer', 
-                                opacity: 1 // Always visible
+                                opacity: 1
                             }}
                             className="heart-icon"
                             onClick={(e) => {
