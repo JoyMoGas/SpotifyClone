@@ -1,10 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight, faSearch, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight, faSearch, faHome, faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 import './styles/Navbar.css';
 import { useMusic } from '../context/MusicContext';
+import { useAuth } from '../context/AuthContext';
 
 export default function Navbar() {
   const { setView } = useMusic();
+  const { currentUser, logout } = useAuth();
   return (
     <nav className="navbar">
       <div className="arrows">
@@ -24,8 +26,16 @@ export default function Navbar() {
       </div>
       
       <div className="actions">
-        <button style={{ padding: '8px 16px', width: '40px', height: '40px', borderRadius: '100%', border: 'none', fontWeight: 'bold' }}>
-            
+        <div className="user-info">
+          <FontAwesomeIcon icon={faUser} style={{ marginRight: '8px' }} />
+          <span>{currentUser}</span>
+        </div>
+        <button 
+          onClick={logout}
+          className="logout-btn"
+          title="Cerrar sesión"
+        >
+          <FontAwesomeIcon icon={faSignOutAlt} />
         </button>
       </div>
     </nav>

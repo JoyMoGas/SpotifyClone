@@ -5,10 +5,17 @@ import Navbar from './components/Navbar';
 import SideBarLeft from './components/SideBarLeft';
 import SideBarRight from './components/SideBarRight';
 import LikedSongs from './components/LikedSongs';
+import Login from './components/Login';
 import { MusicProvider, useMusic } from './context/MusicContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 
 function AppContent() {
   const { currentView, currentSong } = useMusic();
+  const { currentUser } = useAuth();
+
+  if (!currentUser) {
+    return <Login />;
+  }
 
   const gridTemplateColumns = currentSong 
     ? "280px 1fr 280px" 
@@ -36,9 +43,11 @@ function AppContent() {
 
 function App() {
   return (
-    <MusicProvider>
-      <AppContent />
-    </MusicProvider>
+    <AuthProvider>
+      <MusicProvider>
+        <AppContent />
+      </MusicProvider>
+    </AuthProvider>
   );
 }
 

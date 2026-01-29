@@ -17,17 +17,16 @@
 body {
   background-color: var(--bg-black);
   color: var(--text-white);
-  font-family: 'Circular Std', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Circular Std", "Helvetica Neue", Helvetica, Arial, sans-serif;
   height: 100vh;
-  overflow: hidden; /* Prevent body scroll */
+  overflow: hidden;
 }
 
-/* GRID LAYOUT */
 .app-container {
   display: grid;
   height: 100vh;
   padding: 8px;
-  grid-template-areas: 
+  grid-template-areas:
     "sidebar main sidebar-right"
     "footer footer footer";
   grid-template-columns: 280px 1fr 280px;
@@ -37,13 +36,8 @@ body {
 
 /* AREA ASSIGNMENTS */
 .main-body {
-  display: contents; /* Removes this wrapper from the grid influence */
+  display: contents;
 }
-
-/* We need to target the components by their likely class names or container structure */
-/* But since React components don't automatically add classes to their root unless we specify, 
-   we might need to ensure the components render these classes or target :nth-child if structure is rigid.
-   Better to assume the components have classes. */
 
 .sidebar {
   grid-area: sidebar;
@@ -63,15 +57,15 @@ body {
   overflow: hidden;
 }
 
-.sidebar-right { /* You'll need to add this class to SideBarRight */
-    grid-area: sidebar-right;
-    background-color: var(--bg-dark-gray);
-    border-radius: 8px;
-    padding: 16px;
-    overflow-y: auto;
+.sidebar-right {
+  grid-area: sidebar-right;
+  background-color: var(--bg-dark-gray);
+  border-radius: 8px;
+  padding: 16px;
+  overflow-y: auto;
 }
 
-.footer-player { /* This needs to be on the Footer component's root */
+.footer-player {
   grid-area: footer;
   height: 90px;
   background-color: var(--bg-black);
@@ -86,10 +80,9 @@ body {
 .navbar {
   height: 64px;
   width: 100%;
-  /* position: absolute; removed to be part of flex flow or keep absolute but relative to center-wrapper */
   position: sticky;
   top: 0;
-  background-color: rgba(18, 18, 18, 0.95); /* matching MainContent bg roughly */
+  background-color: rgba(18, 18, 18, 0.95);
   display: flex;
   align-items: center;
   padding: 0 24px;
@@ -100,8 +93,6 @@ body {
   flex: 1;
   overflow-y: auto;
   padding: 0 24px 24px 24px;
-  /* Navbar is sticky, so padding-top isn't strictly needed if we want content to go under, 
-     but standard sticky behavior puts it on top. */
   background: linear-gradient(180deg, #222 0%, #121212 300px);
 }
 

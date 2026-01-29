@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import type { Song } from '../data/songs';
+import { useAuth } from './AuthContext';
 
 type ViewType = 'home' | 'liked';
 
@@ -15,17 +16,31 @@ interface MusicContextType {
 const MusicContext = createContext<MusicContextType | undefined>(undefined);
 
 export function MusicProvider({ children }: { children: ReactNode }) {
+  const auth = useAuth();
   const [likedSongs, setLikedSongs] = useState<number[]>(() => {
-    const saved = localStorage.getItem('likedSongs');
-    return saved ? JSON.parse(saved) : [];
+    if (auth.currentUser) {
+      const userFavorites = auth.getUserFavorites();
+      return userFavorites.map(id => parseInt(id));
+    }
+    return [];
   });
-
   const [currentView, setCurrentView] = useState<ViewType>('home');
   const [currentSong, setCurrentSong] = useState<Song | null>(null);
 
   useEffect(() => {
-    localStorage.setItem('likedSongs', JSON.stringify(likedSongs));
-  }, [likedSongs]);
+    if (auth.currentUser) {
+      const userFavorites = auth.getUserFavorites();
+      setLikedSongs(userFavorites.map(id => parseInt(id)));
+    } else {
+      setLikedSongs([]);
+    }
+  }, [auth.currentUser, auth]);
+
+  useEffect(() => {
+    if (auth.currentUser && likedSongs.length >= 0) {
+      auth.setUserFavorites(likedSongs.map(id => id.toString()));
+    }
+  }, [likedSongs, auth]);
 
   const toggleLike = (songId: number) => {
     setLikedSongs(prev => 
